@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<%- include("header")-%>
+
+
+
+<body>
+
+    
+        
+    
+               <table class="table table-striped table-responsive table-hover">
+                <thead>
+                    <h2 style="text-align: center; font-size: 2.5 rem; font-weight: 700;">LIVE!!</h2>
+                    <br>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Start Time</th>
+                        <th scope="col">End Time</th>
+                        <th scope="col">Duration (hrs:mins:secs)</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">STATUS</th>
+                      </tr>
+                </thead>
+                <tr> 
+                    <%var k=0%>
+                    <% for(var i=0;i<arr.length;i++){ %>
+                        <% if((arr[i].site=='CodeForces' || arr[i].site=='CodeChef' || arr[i].site=='LeetCode' || arr[i].site=='AtCoder' ||arr[i].site=='HackerRank' ||arr[i].site=='TopCoder') && (arr[i].status=='CODING')){  %>
+                      <% k++ %>
+<!-- calc duration -->
+                    <%  const totalMinutes = Math.floor(arr[i].duration / 60);%>
+
+                    <%const seconds = arr[i].duration % 60;%>
+                   <%const hours = Math.floor(totalMinutes / 60);%>
+                 <% const minutes = totalMinutes % 60;%>
+                    <th scope="row"><%=k%></th>
+                    <td><%=arr[i].name %></td>
+                    <td><%=arr[i].start_time %></td>
+                    <td><%=arr[i].end_time %></td>
+                    <td><%=hours%>:<%=minutes%>:<%=seconds%>0</td>
+                    <td><a href=<%=arr[i].url%>><%=arr[i].site %></a></td>
+                    <td><%=arr[i].status%></td>
+                </tr>
+                    <% } %>
+                    <% } %>
+                  
+        
+                </tbody>
+            </table>
+           <br>
+           <br>
+            <h2 style="text-align: center; font-size: 1.95rem; font-weight: 700;"><u>UPCOMING</u></h2>
+          <br>  
+    <table class="table table-striped table-responsive table-hover">
+        <thead>
+       
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Duration (hrs:mins:secs)</th>
+                <th scope="col">Link</th>
+                <th scope="col">In 24 Hrs</th>
+              </tr>
+        </thead>
+        <tr> 
+            <%var k=0%>
+            <% for(var i=0;i<arr.length;i++){ %>
+                <% if((arr[i].site=='CodeForces' || arr[i].site=='CodeChef' || arr[i].site=='LeetCode' || arr[i].site=='AtCoder' ||arr[i].site=='HackerRank'|| arr[i].site=='HackerEarth')&&(arr[i].in_24_hours=="No")){  %>
+              <% k++ %>
+              <!-- calc duration -->
+              <%  const totalMinutes = Math.floor(arr[i].duration / 60);%>
+
+              <%const seconds = arr[i].duration % 60;%>
+             <%const hours = Math.floor(totalMinutes / 60);%>
+           <% const minutes = totalMinutes % 60;%>
+           
+            <th scope="row"><%=k%></th>
+            <td><%=arr[i].name %></td>
+            <td><%=arr[i].start_time %></td>
+            <td><%=arr[i].end_time %></td>
+            <td><%=hours%>:<%=minutes%>:<%=seconds%>0</td>
+            <td><a href=<%=arr[i].url%>><%=arr[i].site %></a></td>
+            <td><%=arr[i].in_24_hours%></td>
+        </tr>
+            <% } %>
+            <% } %>
+          
+
+        </tbody>
+    </table>
+      
+</body>
+
+</html>
+
+<%- include("footer")-%>

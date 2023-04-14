@@ -1,0 +1,39 @@
+<%- include("header")-%>
+
+ 
+
+<table class="table table-striped">
+    <thead>
+      <h2 style="text-align: center; font-size: 1.95rem; font-weight: 700;">AtCoder</h2>
+      <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Start Time</th>
+        <th scope="col">End Time</th>
+        <th scope="col">Duration (mins)</th>
+        <th scope="col">Link</th>
+        <th scope="col">In 24 Hrs</th>
+      </tr>
+    </thead>
+    <tr> 
+        <%var k=0%>
+        <% for(var i=0;i<arr.length;i++){ %>
+            <% if(arr[i].site=='AtCoder'){  %>
+          <% k++ %>
+        <th scope="row"><%=k%></th>
+        <td><%=arr[i].name %></td>
+        <td><%=arr[i].start_time %></td>
+        <td><%=arr[i].end_time %></td>
+        <td><%=arr[i].duration%></td>
+        <td><a href=<%=arr[i].url%>><%=arr[i].site %></a></td>
+        <td><%=arr[i].in_24_hours%></td>
+    </tr>
+        <% } %>
+        <% } %>
+      
+
+    </tbody>
+</table>
+</html>
+<%- include("footer")-%>
+

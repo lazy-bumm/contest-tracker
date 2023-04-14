@@ -1,0 +1,39 @@
+<%- include("header")-%>
+
+<body>
+    
+
+    <table class="table table-striped">
+        <thead>
+          <h2 style="text-align: center; font-size: 1.95rem; font-weight: 700;">CodeForces</h2>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Start Time</th>
+            <th scope="col">End Time</th>
+            <th scope="col">Duration (mins)</th>
+            <th scope="col">Link</th>
+            <th scope="col">STATUS</th>
+          </tr>
+        </thead>
+        <tr> 
+            <%var k=0%>
+            <% for(var i=0;i<arr.length;i++){ %>
+                <% if(arr[i].site=='CodeForces'){  %>
+              <% k++ %>
+            <th scope="row"><%=k%></th>
+            <td><%=arr[i].name %></td>
+            <td><%=arr[i].start_time %></td>
+            <td><%=arr[i].end_time %></td>
+            <td><%=arr[i].duration%></td>
+            <td><a href=<%=arr[i].url%>><%=arr[i].site %></a></td>
+            <th scope="col">In 24 Hrs</th>
+        </tr>
+            <% } %>
+            <% } %>
+          
+
+        </tbody>
+    </table>
+</body>
+<%- include("footer")-%>
