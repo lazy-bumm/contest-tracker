@@ -8,6 +8,7 @@ const path = require('path');
 
 const app=express();
 
+
 app.use(express.static(__dirname + '/public'));
 var jsonParser = bodyParser.json()
  
@@ -22,6 +23,16 @@ app.listen(5000,()=>{
 })
 
 var data;
+function formatDate(date) {
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ampm;
+    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + strTime;
+  }
 
 'https://clist.by/api/v2/contest//?username=rumaan&api_key=dc9ed8b489c640d09ed44b3858901dc0326b0ee1';
 const apikey='/?username=rumaan&api_key=dc9ed8b489c640d09ed44b3858901dc0326b0ee1';
@@ -36,9 +47,19 @@ const api_url='https://kontests.net/api/v1/all'
    } catch(e) {
      arr = data
    }
-// for(var i=0;i<arr.length;i++){
-//     console.log(arr[i].name)
-// }
+ 
+
+for(var i=0;i<arr.length;i++){
+    var s_d=arr[i].start_time;
+    var e_d=arr[i].end_time;
+    const s_date = new Date(s_d);
+    const e_date = new Date(e_d);
+       arr[i].start_time=formatDate(s_dateg);
+       arr[i].end_time=formatDate(e_date);
+       
+       
+      
+ }
 
    //var a=JSON.stringify(data)
    //console.log(a);
