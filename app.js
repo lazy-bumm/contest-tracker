@@ -54,7 +54,7 @@ for(var i=0;i<arr.length;i++){
     var e_d=arr[i].end_time;
     const s_date = new Date(s_d);
     const e_date = new Date(e_d);
-       arr[i].start_time=formatDate(s_dateg);
+       arr[i].start_time=formatDate(s_date);
        arr[i].end_time=formatDate(e_date);
        
        
