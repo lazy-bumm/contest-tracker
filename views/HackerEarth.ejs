@@ -18,15 +18,14 @@
     <tr> 
         <%var k=0%>
         <% for(var i=0;i<arr.length;i++){ %>
-            <% if(arr[i].site=='HackerEarth'){  %>
+            <% if(arr[i].site=='hackerearth.com'){  %>
           <% k++ %>
-        <th scope="row"><%=k%></th>
-        <td><%=arr[i].name %></td>
-        <td><%=arr[i].start_time %></td>
-        <td><%=arr[i].end_time %></td>
-        <td><%=arr[i].duration%></td>
-        <td><a href=<%=arr[i].url%>><%=arr[i].site %></a></td>
-        <td><%=arr[i].in_24_hours%></td>
+          <th scope="row"><%=k%></th>
+          <td><%=arr[i].event %></td>
+          <td><%=arr[i].start %></td>
+          <td><%=arr[i].end %></td>
+          <td><%=arr[i].duration%></td>
+          <td><a href=<%=arr[i].href%>><%=arr[i].host %></a></td>
     </tr>
         <% } %>
         <% } %>

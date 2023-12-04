@@ -2,7 +2,7 @@ const { response } = require('express');
 const express=require('express');
 const fetch=require('node-fetch');
 var bodyParser = require('body-parser')
-
+require("dotenv").config();
 const path = require('path');
 
 
@@ -34,13 +34,15 @@ function formatDate(date) {
     return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + strTime;
   }
 
-'https://clist.by/api/v2/contest//?username=rumaan&api_key=dc9ed8b489c640d09ed44b3858901dc0326b0ee1';
-const apikey='/?username=rumaan&api_key=dc9ed8b489c640d09ed44b3858901dc0326b0ee1';
-const api_url='https://kontests.net/api/v1/all'
+
+
+const apiKey = `username=${process.env.USER_NAME}&api_key=${process.env.API_KEY}`;
+
+const api_url=`https://clist.by/api/v4/contest//?${apiKey}&upcoming=true&format_time=true`
  fetch(api_url).then((response)=>response.json()).then((body)=>{
-    
+  
     data=body;
-    //console.log(data)
+    
     let arr;
     try {
     arr  = JSON.parse(data)
@@ -48,31 +50,22 @@ const api_url='https://kontests.net/api/v1/all'
      arr = data
    }
  
-
-for(var i=0;i<arr.length;i++){
-    var s_d=arr[i].start_time;
-    var e_d=arr[i].end_time;
-    const s_date = new Date(s_d);
-    const e_date = new Date(e_d);
-       arr[i].start_time=formatDate(s_date);
-       arr[i].end_time=formatDate(e_date);
-       
-       
-      
- }
-
-   //var a=JSON.stringify(data)
-   //console.log(a);
+  //  console.log(arr.objects)
+  //  for(let i=0;i<arr.objects.length;i++){
+  //      if(arr.objects[i].host=='codeforces.com')
+  //      console.log(arr.objects[i])
+  //  }
+ 
 
 
     app.get("/",(req,res)=>{
-        res.render("list",{arr:arr});
+        res.render("list",{arr:arr.objects});
         
     })
     
     app.get("/contest/:name",(req,res)=>{
         
-        res.render(req.params.name,{arr:arr});
+        res.render(req.params.name,{arr:arr.objects});
     })
 
     app.get("/us",(req,res)=>{
@@ -87,10 +80,10 @@ for(var i=0;i<arr.length;i++){
          
           let a=req.body.contest_name;
           let aa=a.toLowerCase();
-          for(var i=0;i<arr.length;i++){
-            let k=arr[i].name.toLowerCase();
+          for(var i=0;i<arr.objects.length;i++){
+            let k=arr.objects[i].event.toLowerCase();
               if(k.includes(aa))
-              s.push(arr[i]);
+              s.push(arr.objects[i]);
           } 
             if(s.length==0)
             res.send('<h1 style="color:red">NO RESULTS MATCHED</h1>')
